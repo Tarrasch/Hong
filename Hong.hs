@@ -4,7 +4,7 @@ import GameState
 import Constants
 import PaintGame
 import Control.Concurrent
-import SOE
+import Graphics.SOE.Gtk
 import Control.Monad
 import Control.Monad.State
 import ButtonControl
@@ -70,7 +70,7 @@ initialization =
                 ]
 
                w <- liftIO $ openWindowEx "Hong!" (Just (0,0)) (Just (xWin,yWin))
-                               drawBufferedGraphic
+                               drawBufferedGraphic Nothing
 
                chan <- liftIO newChan
                liftIO $ writeChan chan (userControl0, 0.0)

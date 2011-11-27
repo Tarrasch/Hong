@@ -2,7 +2,7 @@ module Constants where
 
 -- A Module containing all constants in the game.
 
-import SOE
+import Graphics.SOE.Gtk
 
 ----------------- Types -----------------
 

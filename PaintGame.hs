@@ -6,7 +6,7 @@ import GameState
 import Constants
 import Test.QuickCheck
 import Control.Monad
-import SOE
+import Graphics.SOE.Gtk
 
 ----------------- Quickstart -----------------
 
@@ -16,7 +16,7 @@ test ::  IO ()
 test
   = runGraphics (
     do w <- openWindowEx "Does it look good?" (Just (0,0)) (Just (xWin,yWin))
-              drawBufferedGraphic
+              drawBufferedGraphic Nothing
        drawState w startState
        spaceClose w
     )
