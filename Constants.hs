@@ -58,18 +58,18 @@ getScaleFactor w h = let v1 = (fromIntegral w / 100)
 
 -- the radius of the ball in pixels
 ballRadius :: ABC
-ballRadius = 3
+ballRadius = 0.15
 
 -- This value is only graphical, because when this value is increased,
 -- the paddle is only expanded to the left (for the left paddle), so
 -- it won't alter the laws when collision-computing, since the rightmost
 -- "line" (again for the left paddle) will still be the same.
 paddleWidth :: ABC
-paddleWidth = 1
+paddleWidth = 0.05
 
 -- This value is obviusly not only graphical.
 paddleHalfHeight :: ABC
-paddleHalfHeight = 5
+paddleHalfHeight = 0.25
 
 
 -- The distance between the left paddle and right paddle.
@@ -77,15 +77,15 @@ paddleHalfHeight = 5
 -- To be precise: The distance between the rightmost of the left paddle
 -- and the leftmost of the right paddle. (also see paddleWidth)
 planeHalfWidth :: ABC
-planeHalfWidth = 40.0
+planeHalfWidth = 2
 
 -- This is obviously not only graphical
 planeHalfHeight :: ABC
-planeHalfHeight = 40.0
+planeHalfHeight = 2
 
 -- The "floor and ceiling"'s height, this is just a graphical value, just like paddleWidth
 borderHeight :: ABC
-borderHeight = 1.0
+borderHeight = 0.05
 
 
 ----------------- Colours -----------------
