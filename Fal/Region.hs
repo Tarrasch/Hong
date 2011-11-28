@@ -3,6 +3,9 @@ module Fal.Region ( Region (Shape, Translate, Scale, Complement,
                 Coordinate,
                 containsS, containsR,
                 module Fal.Shape
+
+                -- Arash
+              , Vector
               ) where
 import Fal.Shape
 

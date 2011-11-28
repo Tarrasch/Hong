@@ -35,7 +35,6 @@ regionToGRegion :: Region -> G.Region
 regionToGRegion r = regToGReg (0,0) (1,1) r
 
 regToGReg :: Vector -> Vector -> Region -> G.Region
-type Vector = (Float,Float)
 
 regToGReg loc sca (Shape s)
   = shapeToGRegion loc sca s
