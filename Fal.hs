@@ -4,10 +4,13 @@ module Fal (
     module Fal.Fal
   , filterEvent
   , pressed
+  , repictimate
   )
   where
 
 import Fal.Fal
+import Fal.Picture (Picture)
+import Fal.Animation (picToGraphic)
 
 -- | Filters events to trigger only for specified condition
 filterEvent :: (a -> Bool) -> Event a -> Event a
@@ -18,3 +21,7 @@ filterEvent f (Event fe) = Event $ map myGuard . fe
 -- | This event gets triggered when given key is pressed
 pressed :: Char -> Event ()
 pressed c = filterEvent (==c) key ->> ()
+
+-- | Reactimate a Behavior of Pictures
+repictimate :: String -> Behavior Picture -> IO ()
+repictimate title beh = reactimate title (lift1 picToGraphic beh)
