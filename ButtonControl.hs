@@ -40,8 +40,7 @@ nothingPressedYet = Set.empty
 toControls :: ButtonControl -> UserControl
 toControls bc =
   UserControl {
-    playerLeft  = msum ['w' ><> Up, 's' ><> Down],
-    playerRight = msum ['o' ><> Up, 'l' ><> Down],
-    restartGame = isPushed 'r' bc
+    playerLeft  = msum ['w' ><> Up, 's' ><> Down]
+  , playerRight = msum ['o' ><> Up, 'l' ><> Down]
   }
   where (><>) = confirm bc

@@ -41,27 +41,23 @@ type PaddleControl = Maybe UpOrDown
 
 -- all the users input will be converted to ...
 data UserControl =
-  UserControl { playerLeft  :: PaddleControl,
-                playerRight :: PaddleControl,
-                restartGame :: Bool
+  UserControl { playerLeft  :: PaddleControl
+              , playerRight :: PaddleControl
               }
 
 -- This is a kind of neutral starting-control-value
 userControl0 :: UserControl
 userControl0 =
   UserControl {
-      playerLeft  = Nothing,
-      playerRight = Nothing,
-      restartGame = False
-  }
+      playerLeft  = Nothing
+    , playerRight = Nothing
+    }
 
 -- The important function, using incremental sampling
 -- UNIMPLEMENTED! (just starting with Paddles movement)
 getStates :: [UserControl] -> [Time] -> [State]
 getStates ucs ts = states
-  where states = startState : withEventualRestart
-        withEventualRestart = let zipRestart = zipWith eventualRestartBall
-                              in  ucs `zipRestart` ballsRedirected
+  where states = startState : ballsRedirected
         ballsRedirected = map redirectBall statesWithPaddles
         statesWithPaddles = [ s { leftPaddle = l, rightPaddle = r}
                             | (l, r, s) <- zip3 leftPaddles rightPaddles statesWithMovedBall]
@@ -131,15 +127,3 @@ swingBall dh dy = newDy
        newDy = if abs trySwingValue < minimumYVelocity
                then minimumYVelocity * signum dy
                else trySwingValue
-
--- This function restarts the game if neccesary
-eventualRestartBall :: UserControl -> State -> State
-eventualRestartBall (UserControl _ _ True) s = s { ballPos = (0, 0), ballDir = startSpeedXY }
-eventualRestartBall _ s                      = s
-
-
-
-
-
-
-
