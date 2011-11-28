@@ -2,16 +2,14 @@ module GameState
  (State (..),
   startState,
   getStates,
-  UpOrDown (..),
-  PaddleControl,
-  UserControl (..),
-  userControl0,
   Time)
   where
 -- | A module declaring the GameState
 --   The Module contains the functions that represent the physics the Pong.
 
 import Constants
+import UserControl
+import Fal
 
 data State =
   State { leftPaddle  :: Float,
@@ -20,8 +18,6 @@ data State =
           ballDir     :: (Float, Float)
         }
   deriving Show
-
-type Time = Float
 
 ----------------- Examples -----------------
 
@@ -35,23 +31,6 @@ startState = State {
 
 ----------------- State-operations (gameplay) -----------------
 
-
-data UpOrDown = Up | Down
-type PaddleControl = Maybe UpOrDown
-
--- all the users input will be converted to ...
-data UserControl =
-  UserControl { playerLeft  :: PaddleControl
-              , playerRight :: PaddleControl
-              }
-
--- This is a kind of neutral starting-control-value
-userControl0 :: UserControl
-userControl0 =
-  UserControl {
-      playerLeft  = Nothing
-    , playerRight = Nothing
-    }
 
 -- The important function, using incremental sampling
 -- UNIMPLEMENTED! (just starting with Paddles movement)
