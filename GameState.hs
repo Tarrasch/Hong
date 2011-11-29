@@ -88,19 +88,18 @@ redirectBall original@(State lp rp (bpx, bpy) (bdirx, bdiry))
        ph   = paddleHalfHeight
        (><) = \v (a, b) -> v > a && b > v
 
--- To add some "action" to the game, and not having a ball with a fully
--- determinable path, we try to "swing" the ball somewhat extra along
--- the y-axis after being hit by a paddle.
+-- | To add some "action" to the game, and not having a ball with a fully
+--   determinable path, we try to "swing" the ball somewhat extra along
+--   the y-axis after being hit by a paddle.
 --
--- To make the game "fun", we try to never go below the shartvalue in y-speed.
--- It simply doesn't look exciting with a slow ball.
+--   To make the game "fun", we try to never go below the shartvalue in y-speed.
+--   It simply doesn't look exciting with a slow ball.
 --
--- Additionally, we do try to swing the ball when it's near the edges of
--- the paddle.
---
--- Param: 1. Difference between ball's middlepoint and paddle (y-axis)
---        2. Current speed of ball in yAxis.
-swingBall :: ABC -> ABC -> ABC
+--   Additionally, we do try to swing the ball when it's near the edges of
+--   the paddle.
+swingBall :: ABC -> -- | Difference between ball's middlepoint and paddle (y-axis)
+             ABC -> -- | Current speed of ball in yAxis.
+             ABC
 swingBall dh dy = newDy
  where trySwingValue =  dy * 3 * abs dh / paddleHalfHeight
        newDy = if abs trySwingValue < minimumYVelocity
