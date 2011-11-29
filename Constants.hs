@@ -105,12 +105,12 @@ paddleSpeedCoefficient = 0.2
 
 -- The balls startSpeeds
 startSpeedXY :: (Float, Float)
-startSpeedXY = (0.043234, 0.003)
+startSpeedXY = (1.2, 0.6)
 
 -- The ball will always have at least this absolute velocity
 -- after getting hit by a paddle.
 minimumYVelocity :: Float
-minimumYVelocity = 0.02
+minimumYVelocity = 0.2
 
 ----------------- Derived Constants -----------------
 
