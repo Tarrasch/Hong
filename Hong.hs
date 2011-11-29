@@ -1,6 +1,8 @@
 module Main where
 
 import Fal
+import GameState
+import PaintGame
 
 main :: IO()
 main = do mapM_ putStrLn
@@ -17,4 +19,5 @@ main = do mapM_ putStrLn
            , "Game made by Arash Rouhani (c) 2010"
            , ""
            ]
-          repictimate "Hong!" undefined
+          let game = pong
+          repictimate "Hong!" (lift1 statePic game)

@@ -1,5 +1,5 @@
 module PaintGame
-  (drawState)
+  (statePic)
   where
 
 import GameState
@@ -19,14 +19,6 @@ test ::  IO ()
 test = draw "Does it look good?" (statePic startState)
 
 ----------------- Functions -----------------
-
--- The convention used here is that drawState uses the other functions,
--- and that drawState supplies an approriate point (often middle-point)
--- of the shape that the helper-functions are drawing.
-
--- Takes a window and the current state of the game and draws it.
-drawState :: Window -> State -> IO()
-drawState win s = drawPic win (statePic s)
 
 statePic :: State -> Picture
 statePic s = foldl Over EmptyPic

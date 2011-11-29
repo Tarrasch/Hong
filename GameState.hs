@@ -1,5 +1,6 @@
 module GameState
  (State (..),
+  pong,
   startState,
   getStates,
   Time)
