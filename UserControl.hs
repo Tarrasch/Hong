@@ -3,8 +3,7 @@ module UserControl where
 import Fal
 import Control.Monad (guard, mplus)
 
-data UpOrDown = Up | Down
-type PaddleControl = Maybe UpOrDown
+type PaddleControl = Float
 
 -- all the users input will be converted to ...
 data UserControl =
@@ -20,5 +19,5 @@ uc = lift2 UserControl (pc 'w' 's') (pc 'o' 'l')
 pc :: Char -> -- | Up key
       Char -> -- | Down key
       Behavior PaddleControl
-pc uk dk = lift2 mplus (mf uk Up) (mf dk Down)
-  where mf k v = lift1 ((>> Just v) . guard) (isHeld k)
+pc uk dk = (mf uk 1.0) + (mf dk (-1.0))
+  where mf k v = lift1 (\b -> if b then v else 0.0) (isHeld k)

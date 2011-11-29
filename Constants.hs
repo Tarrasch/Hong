@@ -68,7 +68,7 @@ paddleWidth :: ABC
 paddleWidth = 0.05
 
 -- This value is obviusly not only graphical.
-paddleHalfHeight :: ABC
+paddleHalfHeight :: (Num a, Fractional a) => a
 paddleHalfHeight = 0.25
 
 
@@ -76,7 +76,7 @@ paddleHalfHeight = 0.25
 --
 -- To be precise: The distance between the rightmost of the left paddle
 -- and the leftmost of the right paddle. (also see paddleWidth)
-planeHalfWidth :: ABC
+planeHalfWidth :: Num a => a
 planeHalfWidth = 2
 
 -- This is obviously not only graphical
