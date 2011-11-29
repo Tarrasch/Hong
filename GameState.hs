@@ -31,9 +31,14 @@ startState = State {
 
 ----------------- State-operations (gameplay) -----------------
 
+pong :: Behavior State
+pong = lift4 State lpy rpy bPos bDir
+  where lpy = lift0 $ leftPaddle  startState
+        rpy = lift0 $ rightPaddle startState
+        bPos = lift0 (0,0)
+        bDir = lift0 (0,0)
 
 -- The important function, using incremental sampling
--- UNIMPLEMENTED! (just starting with Paddles movement)
 getStates :: [UserControl] -> [Time] -> [State]
 getStates ucs ts = states
   where states = startState : ballsRedirected
