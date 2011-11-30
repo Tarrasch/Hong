@@ -35,12 +35,12 @@ paddlePic v = Region paddleColor reg
   where reg = Translate v $ Shape $ Rectangle paddleWidth (2*paddleHalfHeight)
 
 leftPaddlePic, rightPaddlePic :: Float -> Picture
-leftPaddlePic  y = paddlePic (-planeHalfWidth - paddleWidth/2, y)
-rightPaddlePic y = paddlePic ( planeHalfWidth + paddleWidth/2, y)
+leftPaddlePic  y = paddlePic (-planeHalfWidth - paddleWidth/2 - ballRadius, y)
+rightPaddlePic y = paddlePic ( planeHalfWidth + paddleWidth/2 + ballRadius, y)
 
 bordersPic :: Picture
 bordersPic = Region borderColor reg
   where reg   = roof `Union` floor
-        roof  = Translate (0,  planeHalfHeight+borderHeight/2) $ Shape shp
-        floor = Translate (0, -planeHalfHeight-borderHeight/2) $ Shape shp
-        shp   = Rectangle (2*planeHalfWidth) borderHeight
+        roof  = Translate (0,  planeHalfHeight + borderHeight/2 + ballRadius) $ Shape shp
+        floor = Translate (0, -planeHalfHeight - borderHeight/2 - ballRadius) $ Shape shp
+        shp   = Rectangle (2*planeHalfWidth+2*ballRadius) borderHeight
