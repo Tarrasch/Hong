@@ -104,8 +104,11 @@ paddleSpeedCoefficient :: Float
 paddleSpeedCoefficient = 0.2
 
 -- The balls startSpeeds
-startSpeedXY :: (Float, Float)
-startSpeedXY = (1.2, 0.6)
+startSpeedX :: Float
+startSpeedX = 1.2
+
+startSpeedY :: Float
+startSpeedY = 0.6
 
 -- The ball will always have at least this absolute velocity
 -- after getting hit by a paddle.
