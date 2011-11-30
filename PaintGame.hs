@@ -4,7 +4,6 @@ module PaintGame
 
 import GameState
 import Constants
-import Test.QuickCheck
 import Control.Monad
 import Fal.Picture
 import Fal.Region
