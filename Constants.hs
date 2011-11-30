@@ -59,11 +59,6 @@ startSpeedX = 0.5
 startSpeedY :: Float
 startSpeedY = 0.2
 
--- The ball will always have at least this absolute velocity
--- after getting hit by a paddle.
-minimumYVelocity :: Float
-minimumYVelocity = 0.2
-
 ----------------- Derived Constants -----------------
 
 -- This section contain constants that are only depending on other constants

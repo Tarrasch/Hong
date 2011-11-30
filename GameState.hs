@@ -90,8 +90,8 @@ pong' startState uc =
 swingBall :: Float -> -- ^ Difference between ball and paddle in y
              Float -> -- ^ Current speed of ball in yAxis.
              Float    -- ^ Multiply speed by this factor to get a good swing
-swingBall dh dy = newDy
- where trySwingValue =  dy * 3 * abs dh / paddleHalfHeight
-       newDy = if abs trySwingValue < minimumYVelocity
-               then minimumYVelocity * signum dy
+swingBall dh yvel = newyvel
+ where trySwingValue =  yvel * 3 * abs dh / paddleHalfHeight
+       newyvel = if abs trySwingValue < startSpeedY
+               then startSpeedY * signum yvel
                else trySwingValue
