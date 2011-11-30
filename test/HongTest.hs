@@ -9,5 +9,5 @@ import Prelude hiding (reverse)
 
 specs :: [Spec]
 specs = describe "Hong"
-  [ it "Test the test framework" $ do return True
+  [ it "Tests the test framework" True
   ]

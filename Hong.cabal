@@ -48,10 +48,14 @@ Cabal-version:       >=1.2
 
 Executable Hong
   -- .hs or .lhs file containing the Main module.
-  -- Main-is:             
+  Main-is: Hong.hs
   
   -- Packages needed in order to build this package.
-  -- Build-depends:       
+  Build-depends:
+     base            >= 3 && < 5
+   , soegtk          == 0.12.1
+   , ghc-prim
+
   
   -- Modules not exported by this package.
   -- Other-modules:       
@@ -66,7 +70,7 @@ test-suite test
 
     ghc-options: -Wall
     build-depends:
-                   base >= 4 && < 5
+                   base >= 3 && < 5
                  , hspec >= 0.8 && < 0.10
 
 source-repository head
