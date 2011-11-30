@@ -62,7 +62,10 @@ pong' startState uc =
         xpos    = gets xPosition + integral xvel
         ypos    = gets yPosition + integral yvel
         xvel    = xVelocity startState `stepAccum` xbounce ->> negate
-        yvel    = yVelocity startState `stepAccum` ybounce ->> negate
+        yvel    = yVelocity startState `stepAccum`
+                      (ybounce ->> negate
+                   .|. lbounce `snapshot_` (swing $* ldy)
+                   .|. rbounce `snapshot_` (swing $* rdy))
         ldy     = absb $ lpy - ypos
         rdy     = absb $ rpy - ypos
         ldx     = absb $ (-planeHalfWidth) - xpos
@@ -73,12 +76,13 @@ pong' startState uc =
         ybounce = when $ absb ypos >* planeHalfWidth
         absb    = lift1 abs
         gets f  = lift0 (f startState)
+        swing   = lift0 swingBall
 
 -- | To add some "action" to the game, and not having a ball with a fully
 --   determinable path, we try to "swing" the ball somewhat extra along
 --   the y-axis after being hit by a paddle.
 --
---   To make the game "fun", we try to never go below the shartvalue in y-speed.
+--   To make the game "fun", we try to never go below the startvalue in y-speed.
 --   It simply doesn't look exciting with a slow ball.
 --
 --   Additionally, we do try to swing the ball when it's near the edges of
