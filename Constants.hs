@@ -105,10 +105,10 @@ paddleSpeedCoefficient = 0.2
 
 -- The balls startSpeeds
 startSpeedX :: Float
-startSpeedX = 1.2
+startSpeedX = 0.5
 
 startSpeedY :: Float
-startSpeedY = 0.6
+startSpeedY = 0.2
 
 -- The ball will always have at least this absolute velocity
 -- after getting hit by a paddle.
@@ -123,4 +123,8 @@ minimumYVelocity = 0.2
 -- are really badly set.
 absHighestPaddlePoint = planeHalfHeight - paddleHalfHeight
 
+----------------- Other -----------------
 
+-- | A small number compared to the other values
+epsilon :: Float
+epsilon = 0.001
