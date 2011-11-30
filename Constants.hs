@@ -4,25 +4,13 @@ module Constants where
 
 import Graphics.SOE.Gtk
 
------------------ Constants -----------------
-
--- the radius of the ball in pixels
-ballRadius :: Float
-ballRadius = 0.15
-
--- This value is only graphical, because when this value is increased,
--- the paddle is only expanded to the left (for the left paddle), so
--- it won't alter the laws when collision-computing, since the rightmost
--- "line" (again for the left paddle) will still be the same.
-paddleWidth :: Float
-paddleWidth = 0.05
+----------------- Play area metrics -----------------
 
 -- This value is obviusly not only graphical.
 paddleHalfHeight :: (Num a, Fractional a) => a
 paddleHalfHeight = 0.25
 
-
--- The distance between the left paddle and right paddle.
+-- Half the distance between the left paddle and right paddle.
 --
 -- To be precise: The distance between the rightmost of the left paddle
 -- and the leftmost of the right paddle. (also see paddleWidth)
@@ -33,14 +21,25 @@ planeHalfWidth = 2
 planeHalfHeight :: Float
 planeHalfHeight = 2
 
--- The "floor and ceiling"'s height, this is just a graphical value, just like paddleWidth
+
+----------------- Purely graphical constants -----------------
+
+-- We try to keep as many constants purely graphical to simplify logic
+
+-- This value is only graphical, because when this value is increased,
+-- the paddle is only expanded to the left (for the left paddle), so
+-- it won't alter the laws when collision-computing, since the rightmost
+-- "line" (again for the left paddle) will still be the same.
+paddleWidth :: Float
+paddleWidth = 0.05
+
+-- The "floor and ceiling"'s height, this is just a graphical value
 borderHeight :: Float
 borderHeight = 0.05
 
+ballRadius :: Float
+ballRadius = 0.15
 
------------------ Colours -----------------
-
--- These values are purely graphical
 ballColor, paddleColor, borderColor :: Color
 ballColor   = Yellow
 paddleColor = Blue
@@ -69,9 +68,8 @@ minimumYVelocity = 0.2
 
 -- This section contain constants that are only depending on other constants
 
--- This value should be positive, or else the constants above
--- are really badly set.
-absHighestPaddlePoint = planeHalfHeight - paddleHalfHeight
+-- This value should be positive!
+highestPaddlePoint = planeHalfHeight - paddleHalfHeight
 
 ----------------- Other -----------------
 
