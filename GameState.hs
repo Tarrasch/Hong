@@ -87,9 +87,9 @@ pong' startState uc =
 --
 --   Additionally, we do try to swing the ball when it's near the edges of
 --   the paddle.
-swingBall :: ABC -> -- ^ Difference between ball's middlepoint and paddle (y-axis)
-             ABC -> -- ^ Current speed of ball in yAxis.
-             ABC
+swingBall :: Float -> -- ^ Difference between ball and paddle in y
+             Float -> -- ^ Current speed of ball in yAxis.
+             Float    -- ^ Multiply speed by this factor to get a good swing
 swingBall dh dy = newDy
  where trySwingValue =  dy * 3 * abs dh / paddleHalfHeight
        newDy = if abs trySwingValue < minimumYVelocity
