@@ -3,6 +3,7 @@ module Main where
 import Fal
 import GameState
 import PaintGame
+import Middleware
 
 main :: IO()
 main = do mapM_ putStrLn
@@ -19,5 +20,5 @@ main = do mapM_ putStrLn
            , "Game made by Arash Rouhani (c) 2010"
            , ""
            ]
-          let game = pong
+          let game = timeMiddleware pong
           repictimate "Hong!" (lift1 statePic game)
