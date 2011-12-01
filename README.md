@@ -73,4 +73,27 @@ installed the game you can easily run the tests
 
 Of course the tests pass.
 
+### Fal
+
+I've manually included the Fal files. To hierarcially seperate code
+I written from library code I put Fal-files in the folder `Fal`.
+
+Fal is very small, and lacks features,
+so I was forced to add my addendum to it, I called it `Fal.hs`.
+
+### Middleware
+
+Fal is great as you it exposes an interface, with an exposed interface
+one can write middlewares that work for all Fal programs. I've
+examplified this by a timemanipulating middleware, which allows the
+user to increase/decrease game speed and pause the game.
+That exact same middleware can be used for anything written
+in Fal!
+
+Other middleware one could have written:
+
+  * Allow any game to be restartable
+  * Allow any game to have save states.
+
+
 [hp]: http://hackage.haskell.org/platform/
