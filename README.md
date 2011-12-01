@@ -2,7 +2,7 @@
 
 This is a pong clone written in haskell.
 
-![Screenshot of Pond](Pong.png)
+![Hong](/Hong.png "Hong!")
 
 ## Installing and Running
 
