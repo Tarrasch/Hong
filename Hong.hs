@@ -16,7 +16,7 @@ main = do mapM_ putStrLn
            , "Use +/- for altering the game speed"
            , "Use B for make time go backwards"
            , ""
-           , "Game made by Arash Rouhani (c) 2010"
+           , "Game made by Arash Rouhani (c) 2011"
            , ""
            ]
           let game = timeMiddleware pong
