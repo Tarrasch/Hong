@@ -9,7 +9,7 @@ module HongTest (specs) where
 import Test.Hspec
 import Test.Hspec.HUnit ()
 
-import Fal (runBehavior)
+import Fal
 import GameState
 import UserControl
 import Constants
@@ -17,15 +17,16 @@ import Constants
 run :: State -> [State]
 run s0 = runBehavior (pong' s0 uc) (repeat Nothing, [0, 0.001..])
 
-ever :: (State -> Bool) -> [State] -> Bool
+ever, never :: (State -> Bool) -> [State] -> Bool
 ever f ss = any f $ take 100000 ss
+never f = not . ever f
 
 outside :: State -> Bool
 outside s = abs (xPosition s) > (planeHalfWidth  + epsilon)
          || abs (yPosition s) > (planeHalfHeight + epsilon)
 
 alwaysInside :: [State] -> Bool
-alwaysInside = not . ever outside
+alwaysInside = never outside
 
 specs :: [Spec]
 specs = describe "Hong"
@@ -50,10 +51,22 @@ specs = describe "Hong"
                         , rightPaddle = (-1000) }
     in describe "avoids bounces when paddle not present" [
       let ss = run s0{ xVelocity = 1 }
-      in  it "no bounce right paddle" $
+      in  it "no bounce on right paddle" $
              ever (\s -> xPosition s > 2*planeHalfWidth) ss
     , let ss = run s0{ xVelocity = (-1) }
       in  it "no bounce on left paddle" $
              ever (\s -> xPosition s < (-2)*planeHalfWidth) ss
+    ]
+  , let ts        = [0.01..]
+        ucl       = lift1 (signum . (10-)) time
+        ucr       = lift1 (negate . signum . (10-)) time
+        uc        = lift2 UserControl ucl ucr
+        ss        = runBehavior (pong' startState uc) (repeat Nothing, ts)
+        maxHeight = highestPaddlePoint + epsilon
+    in describe "paddles move correctly" [
+      it "can move left  paddle"   $ ever (\s -> leftPaddle s > planeHalfHeight/2) ss
+    , it "can move right paddle"   $ ever (\s -> rightPaddle s > planeHalfHeight/2) ss
+    , it "has bounded left  paddle" $ never (\s -> abs (leftPaddle s)  > maxHeight) ss
+    , it "has bounded right paddle" $ never (\s -> abs (rightPaddle s) > maxHeight) ss
     ]
   ]
