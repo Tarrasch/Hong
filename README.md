@@ -2,7 +2,7 @@
 
 This is a pong clone written in haskell.
 
-![Hong](/Hong.png "Hong!")
+![Hong](https://github.com/Tarrasch/Hong/raw/master/Hong.png "Hong!")
 
 ## Installing and Running
 
