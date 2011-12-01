@@ -7,6 +7,7 @@ module Fal (
   , released
   , repictimate
   , isHeld
+  , boundedIntegral
   )
   where
 
@@ -42,3 +43,10 @@ keyReleased :: Event Char
 keyReleased = Event (\(uas,_) -> map getkey uas)
       where getkey (Just (Key ch False)) = Just ch
             getkey _                     = Nothing
+
+boundedIntegral :: (Float, Float) -> Behavior Float -> Behavior Float
+boundedIntegral (lb, ub) (Behavior fb)
+  = Behavior (\uts@(us,t:ts) -> 0 : loop t 0 ts (fb uts))
+      where loop t0 acc (t1:ts) (a:as)
+                 = let acc' = max lb $ min ub $ acc + (t1-t0)*a
+                   in acc' : loop t1 acc' ts as
