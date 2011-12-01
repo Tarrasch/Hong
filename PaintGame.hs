@@ -1,3 +1,4 @@
+-- | The module defining how to paint a state
 module PaintGame
   (statePic)
   where
@@ -19,6 +20,7 @@ test = draw "Does it look good?" (statePic startState)
 
 ----------------- Functions -----------------
 
+-- | Given a state of the game, paint the ball, borders and paddles.
 statePic :: State -> Picture
 statePic s = foldl Over EmptyPic
    [ ballPic        (ballPos s)
