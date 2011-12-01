@@ -12,7 +12,7 @@ import Test.Hspec.HUnit ()
 import Fal
 import GameState
 import UserControl
-import Constants
+import HongConstants
 
 run :: State -> [State]
 run s0 = runBehavior (pong' s0 uc) (repeat Nothing, [0, 0.001..])

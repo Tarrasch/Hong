@@ -3,7 +3,7 @@ module PaintGame
   where
 
 import GameState
-import Constants
+import HongConstants
 import Control.Monad
 import Fal.Picture
 import Fal.Region

@@ -10,7 +10,7 @@ module GameState (
   )
   where
 
-import Constants
+import HongConstants
 import UserControl
 import Fal
 
