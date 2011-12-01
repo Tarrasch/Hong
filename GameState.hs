@@ -57,8 +57,8 @@ pong' :: State  -- ^ Initial state to start from
       -> Behavior State
 pong' startState uc =
     lift6 State lpy rpy xpos ypos xvel yvel
-  where lpy     = gets leftPaddle  + integral (lift1 playerLeft  uc)
-        rpy     = gets rightPaddle + integral (lift1 playerRight uc)
+  where lpy     = gets leftPaddle  + bIntegral (lift1 playerLeft  uc)
+        rpy     = gets rightPaddle + bIntegral (lift1 playerRight uc)
         xpos    = gets xPosition + integral xvel
         ypos    = gets yPosition + integral yvel
         xvel    = xVelocity startState `stepAccum` xbounce ->> negate
@@ -77,6 +77,7 @@ pong' startState uc =
         absb    = lift1 abs
         gets f  = lift0 (f startState)
         swing   = lift0 swingBall
+        bIntegral = boundedIntegral (-highestPaddlePoint, highestPaddlePoint)
 
 -- | To add some "action" to the game, and not having a ball with a fully
 --   determinable path, we try to "swing" the ball somewhat extra along
