@@ -2,6 +2,8 @@
 
 This is a pong clone written in haskell.
 
+![Screenshot of Pond](Pong.png)
+
 ## Installing and Running
 
   1. First get the [Haskell Platform][hp].
