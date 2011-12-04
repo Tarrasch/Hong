@@ -66,7 +66,11 @@ is the main function, which simply only starts the game! That's it!
 ### Actual testing
 
 I would be a hypocrit praising purity without writing actual
-unit tests. I've used `hspec` and *after* you have successfully
+unit tests. I've used `hspec`, get it with
+
+    cabal install hspec
+
+and *after* you have successfully
 installed the game you can easily run the tests
 
     ghci test/HongTest.hs
