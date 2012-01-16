@@ -15,10 +15,10 @@ import UserControl
 import HongConstants
 
 run :: State -> [State]
-run s0 = runBehavior (pong' s0 uc) (repeat Nothing, [0, 0.001..])
+run s0 = runBehavior (pong' s0 uc) (repeat Nothing, [0, 0.002..])
 
 ever, never :: (State -> Bool) -> [State] -> Bool
-ever f ss = any f $ take 100000 ss
+ever f ss = any f $ take 20000 ss
 never f = not . ever f
 
 outside :: State -> Bool
