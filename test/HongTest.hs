@@ -28,45 +28,43 @@ outside s = abs (xPosition s) > (planeHalfWidth  + epsilon)
 alwaysInside :: [State] -> Bool
 alwaysInside = never outside
 
-specs :: [Spec]
-specs = describe "Hong"
-  [ it "tests the test framework" True
+specs :: Spec
+specs = describe "Hong" $ do
+    it "tests the test framework" True
 
-  , let ss = run startState{ xVelocity = 0 }
-    in describe "bounces on walls" [
+    describe "bounces on walls" $ do
+      let ss = run startState{ xVelocity = 0 }
       it "always have ball inside" $ alwaysInside ss
-    , it "bounces roof"  $ ever (\s -> yVelocity s < 0) ss
-    , it "bounces floor" $
+      it "bounces roof"  $ ever (\s -> yVelocity s < 0) ss
+      it "bounces floor" $
           ever (\s -> yPosition s < 0 && yVelocity s > 0) ss
-    ]
-  , let ss = run startState{ yVelocity = 0 }
-    in describe "bounces on paddles" [
+
+    describe "bounces on paddles" $ do
+      let ss = run startState{ yVelocity = 0 }
       it "keeps bouncing" $ alwaysInside ss
-    , it "bounces on right paddle" $ ever (\s -> xVelocity s < 0) ss
-    , it "bounces on left  paddle" $
+      it "bounces on right paddle" $ ever (\s -> xVelocity s < 0) ss
+      it "bounces on left  paddle" $
           ever (\s -> xPosition s < 0 && xVelocity s > 0) ss
-    ]
-  , let s0 = startState { yVelocity = 0
-                        , leftPaddle = 1000
-                        , rightPaddle = (-1000) }
-    in describe "avoids bounces when paddle not present" [
+
+    describe "avoids bounces when paddle not present" $ do
+      let s0 = startState { yVelocity = 0
+                          , leftPaddle = 1000
+                          , rightPaddle = (-1000) }
       let ss = run s0{ xVelocity = 1 }
-      in  it "no bounce on right paddle" $
-             ever (\s -> xPosition s > 2*planeHalfWidth) ss
-    , let ss = run s0{ xVelocity = (-1) }
-      in  it "no bounce on left paddle" $
-             ever (\s -> xPosition s < (-2)*planeHalfWidth) ss
-    ]
-  , let ts        = [0.01..]
-        ucl       = lift1 (signum . (10-)) time
-        ucr       = lift1 (negate . signum . (10-)) time
-        uc        = lift2 UserControl ucl ucr
-        ss        = runBehavior (pong' startState uc) (repeat Nothing, ts)
-        maxHeight = highestPaddlePoint + epsilon
-    in describe "paddles move correctly" [
+        in  it "no bounce on right paddle" $
+               ever (\s -> xPosition s > 2*planeHalfWidth) ss
+      let ss = run s0{ xVelocity = (-1) }
+        in  it "no bounce on left paddle" $
+               ever (\s -> xPosition s < (-2)*planeHalfWidth) ss
+
+    describe "paddles move correctly" $ do
+      let ts        = [0.01..]
+          ucl       = lift1 (signum . (10-)) time
+          ucr       = lift1 (negate . signum . (10-)) time
+          uc        = lift2 UserControl ucl ucr
+          ss        = runBehavior (pong' startState uc) (repeat Nothing, ts)
+          maxHeight = highestPaddlePoint + epsilon
       it "can move left  paddle"   $ ever (\s -> leftPaddle s > planeHalfHeight/2) ss
-    , it "can move right paddle"   $ ever (\s -> rightPaddle s > planeHalfHeight/2) ss
-    , it "has bounded left  paddle" $ never (\s -> abs (leftPaddle s)  > maxHeight) ss
-    , it "has bounded right paddle" $ never (\s -> abs (rightPaddle s) > maxHeight) ss
-    ]
-  ]
+      it "can move right paddle"   $ ever (\s -> rightPaddle s > planeHalfHeight/2) ss
+      it "has bounded left  paddle" $ never (\s -> abs (leftPaddle s)  > maxHeight) ss
+      it "has bounded right paddle" $ never (\s -> abs (rightPaddle s) > maxHeight) ss
